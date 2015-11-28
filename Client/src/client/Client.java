@@ -23,10 +23,7 @@ class ClientReceiver extends Thread {
                 String response;
                 response= din.readUTF();
                 System.out.println(response);
-                if(response.equalsIgnoreCase("Bye"))
-                    break;
             }
-//            din.close();
         } catch (IOException ex) {
             Logger.getLogger(ClientReceiver.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -49,10 +46,7 @@ class ClientSender extends Thread {
             while(true){
                 userIn=sc.nextLine();
                 dout.writeUTF(userIn);
-                if(userIn.equalsIgnoreCase("Bye"))
-                    break;
             }
-//            dout.close();
         } catch (IOException ex) {
             Logger.getLogger(ClientReceiver.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -65,15 +59,11 @@ public class Client {
         try {
             Socket client = new Socket("localhost",1234);
             ClientReceiver cr=new ClientReceiver(client);
-            ClientSender cs = new ClientSender(client);
+            ClientSender cs = new ClientSender(client);  
             
-            
-                cs.start();
-                cr.start();
-            
-   
-          
-            
+            cs.start();
+            cr.start();
+        
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
